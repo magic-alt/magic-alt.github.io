@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | relative_url }}">
+  <link rel="stylesheet" href="{{ "/assets/css/styles.css" | relative_url }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrapper">
+      <a class="site-title" href="{{ "/" | relative_url }}">{{ site.title }}</a>
+      <nav class="site-nav">
+        <a href="{{ "/" | relative_url }}">首页</a>
+        <a href="{{ "/archive/" | relative_url }}">归档</a>
+        <a href="{{ "/tags/" | relative_url }}">标签</a>
+        <a href="{{ "/about/" | relative_url }}">关于</a>
+      </nav>
+    </div>
+  </header>
+  <main class="site-main wrapper">

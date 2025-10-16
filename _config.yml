@@ -1,0 +1,46 @@
+title: Magic Alt Blog
+description: >-
+  分享日常开发、创意与学习笔记的个人博客。
+lang: zh-CN
+url: https://magic-alt.github.io
+baseurl: ""
+author:
+  name: Magic Alt
+  email: you@example.com
+timezone: Asia/Shanghai
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      author: Magic Alt
+permalink: /:categories/:title/
+
+paginate: 5
+paginate_path: "/page:num/"
+
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+sass:
+  style: compressed
+
+collections:
+  pages:
+    output: true
+    permalink: /:path/
+
+# Build settings
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
