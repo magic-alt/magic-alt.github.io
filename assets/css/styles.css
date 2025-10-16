@@ -53,7 +53,7 @@ a:focus {
 }
 
 .wrapper {
-  width: min(860px, 90vw);
+  width: min(1120px, 92vw);
   margin: 0 auto;
   padding: 0 1rem;
   position: relative;
@@ -168,13 +168,6 @@ a:focus {
   border-color: var(--accent-strong);
 }
 
-.highlights {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.75rem;
-  margin-bottom: 3.5rem;
-}
-
 .highlight-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -248,9 +241,24 @@ a:focus {
   color: var(--muted-color);
 }
 
+
+.home-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(240px, 1fr);
+  gap: 2.5rem;
+  align-items: start;
+  margin-bottom: 3.5rem;
+}
+
 .post-list {
   display: grid;
   gap: 2rem;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
 }
 
 .post-item {
@@ -376,6 +384,80 @@ a:focus {
   min-width: 4rem;
 }
 
+.about {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0 4rem;
+}
+
+.about-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(280px, 1.2fr);
+  gap: 2.5rem;
+  align-items: center;
+  width: min(960px, 100%);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1.5rem;
+  padding: 2.75rem;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(18px);
+}
+
+.about-portrait {
+  margin: 0;
+}
+
+.about-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.about-content h1 {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  font-size: clamp(2rem, 4vw, 2.6rem);
+}
+
+.about-content p {
+  margin-bottom: 1.2rem;
+}
+
+.about-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: grid;
+  gap: 0.75rem;
+  color: var(--muted-color);
+  font-size: 0.98rem;
+}
+
+@media (max-width: 1080px) {
+  .home-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .about-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .about-content h1 {
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+  }
+
+  .about-portrait img {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}
+
 @media (max-width: 640px) {
   .site-header .wrapper {
     flex-direction: column;
@@ -393,5 +475,9 @@ a:focus {
 
   .post-title {
     font-size: 1.9rem;
+  }
+
+  .sidebar {
+    gap: 1.25rem;
   }
 }
