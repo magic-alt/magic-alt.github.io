@@ -1,0 +1,181 @@
+:root {
+  color-scheme: light dark;
+  --bg-color: #fdfdfd;
+  --text-color: #1f2933;
+  --accent-color: #2563eb;
+  --border-color: #e5e7eb;
+  --muted-color: #6b7280;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Noto Sans SC", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #111827;
+    --text-color: #e5e7eb;
+    --accent-color: #60a5fa;
+    --border-color: #1f2937;
+    --muted-color: #9ca3af;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.wrapper {
+  width: min(860px, 90vw);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(6px);
+}
+
+.site-header .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+}
+
+.site-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.site-nav a {
+  margin-left: 1rem;
+  color: var(--muted-color);
+}
+
+.site-nav a:hover, .site-nav a:focus {
+  color: var(--accent-color);
+}
+
+.site-main {
+  padding: 2rem 0 4rem;
+}
+
+.post-list {
+  display: grid;
+  gap: 2rem;
+}
+
+.post-item h2 {
+  margin-bottom: 0.25rem;
+  font-size: 1.5rem;
+}
+
+.post-date {
+  color: var(--muted-color);
+  font-size: 0.875rem;
+}
+
+.post-excerpt {
+  margin: 0.75rem 0 1rem;
+}
+
+.read-more {
+  font-weight: 600;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  font-size: 0.95rem;
+}
+
+.pagination-item {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+}
+
+.post-header {
+  margin-bottom: 2rem;
+}
+
+.post-title {
+  margin: 0 0 0.5rem;
+  font-size: 2.25rem;
+}
+
+.post-meta {
+  color: var(--muted-color);
+}
+
+.post-content h2 {
+  margin-top: 2.5rem;
+}
+
+.post-pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  gap: 1rem;
+}
+
+.post-pagination a {
+  flex: 1;
+  text-align: center;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+}
+
+.site-footer {
+  border-top: 1px solid var(--border-color);
+  padding: 2rem 0;
+  color: var(--muted-color);
+  font-size: 0.875rem;
+}
+
+.archive ul,
+.tags ul {
+  list-style: none;
+  padding: 0;
+}
+
+.archive li,
+.tags li {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.archive-date,
+.tag-date {
+  color: var(--muted-color);
+  min-width: 4rem;
+}
+
+@media (max-width: 640px) {
+  .site-header .wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .post-title {
+    font-size: 1.75rem;
+  }
+}

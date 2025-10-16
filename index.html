@@ -1,0 +1,35 @@
+---
+layout: default
+title: 最新文章
+---
+{% if paginator %}
+  {% assign posts = paginator.posts %}
+{% else %}
+  {% assign posts = site.posts %}
+{% endif %}
+<section class="post-list">
+  {% if posts and posts.size > 0 %}
+    {% for post in posts %}
+    <article class="post-item">
+      <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+      <p class="post-date">{{ post.date | date: "%Y-%m-%d" }}</p>
+      <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
+      <a class="read-more" href="{{ post.url | relative_url }}">阅读全文 →</a>
+    </article>
+    {% endfor %}
+  {% else %}
+    <p>还没有文章，敬请期待。</p>
+  {% endif %}
+</section>
+
+{% if paginator and paginator.total_pages > 1 %}
+<nav class="pagination">
+  {% if paginator.previous_page %}
+  <a class="pagination-item" href="{{ paginator.previous_page_path | relative_url }}">← 上一页</a>
+  {% endif %}
+  <span class="pagination-info">第 {{ paginator.page }} / {{ paginator.total_pages }} 页</span>
+  {% if paginator.next_page %}
+  <a class="pagination-item" href="{{ paginator.next_page_path | relative_url }}">下一页 →</a>
+  {% endif %}
+</nav>
+{% endif %}
