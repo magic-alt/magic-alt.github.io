@@ -1,4 +1,4 @@
-# Magic Alt 博客模板
+# Kaermaxc 博客模板
 
 这是一个使用 [Jekyll](https://jekyllrb.com/) 构建的简洁博客模板，预配置了文章、分页、标签、归档和 RSS 等常见功能，适合部署在 GitHub Pages 上。
 

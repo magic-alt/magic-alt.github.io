@@ -18,39 +18,8 @@ title: 最新文章
   </div>
 </section>
 
-<section class="highlights">
-  <div class="highlight-card">
-    <h2 class="highlight-title">FEATURED TAGS</h2>
-    {% if site.tags and site.tags.size > 0 %}
-    <ul class="tag-cloud">
-      {% assign tags_sorted = site.tags | sort %}
-      {% for tag in tags_sorted %}
-      {% assign tag_name = tag[0] %}
-      {% assign tag_slug = tag_name | slugify %}
-      <li>
-        <a class="tag-chip" href="{{ ('/tags/#' | append: tag_slug) | relative_url }}">#{{ tag_name }}
-          <span class="tag-count">{{ tag[1].size }}</span>
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <p class="empty-copy">暂无标签内容，敬请期待更新。</p>
-    {% endif %}
-  </div>
-  <div class="highlight-card about-me">
-    <h2 class="highlight-title">ABOUT ME</h2>
-    <p class="about-intro">你好，我是 <strong>{{ site.author.name }}</strong>，一名热爱探索代码与创意表达的创作者。</p>
-    <ul class="about-list">
-      <li>🧭 记录学习心得与实战经验</li>
-      <li>🛠️ 分享实用工具、工作流与效率技巧</li>
-      <li>🌌 用故事串起灵感与生活里的小发现</li>
-    </ul>
-    <a class="hero-button ghost" href="{{ "/about/" | relative_url }}">了解更多 →</a>
-  </div>
-</section>
-
-<section class="post-list">
+<div class="home-layout">
+  <section class="post-list">
   {% if posts and posts.size > 0 %}
     {% for post in posts %}
     <article class="post-item">
@@ -63,7 +32,39 @@ title: 最新文章
   {% else %}
     <p>还没有文章，敬请期待。</p>
   {% endif %}
-</section>
+  </section>
+  <aside class="sidebar" aria-label="侧边栏">
+    <div class="highlight-card">
+      <h2 class="highlight-title">FEATURE TAGS</h2>
+      {% if site.tags and site.tags.size > 0 %}
+      <ul class="tag-cloud">
+        {% assign tags_sorted = site.tags | sort %}
+        {% for tag in tags_sorted %}
+        {% assign tag_name = tag[0] %}
+        {% assign tag_slug = tag_name | slugify %}
+        <li>
+          <a class="tag-chip" href="{{ ('/tags/#' | append: tag_slug) | relative_url }}">#{{ tag_name }}
+            <span class="tag-count">{{ tag[1].size }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="empty-copy">暂无标签内容，敬请期待更新。</p>
+      {% endif %}
+    </div>
+    <div class="highlight-card about-me">
+      <h2 class="highlight-title">ABOUT ME</h2>
+      <p class="about-intro">你好，我是 <strong>{{ site.author.name }}</strong>，专注将创意灵感与技术实践结合的创作者。</p>
+      <ul class="about-list">
+        <li>🧭 记录学习心得与实战经验</li>
+        <li>🛠️ 分享实用工具、工作流与效率技巧</li>
+        <li>🌌 用故事串起灵感与生活里的小发现</li>
+      </ul>
+      <a class="hero-button ghost" href="{{ "/about/" | relative_url }}">了解更多 →</a>
+    </div>
+  </aside>
+</div>
 
 {% if paginator and paginator.total_pages > 1 %}
 <nav class="pagination">
