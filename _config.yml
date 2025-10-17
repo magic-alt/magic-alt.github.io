@@ -3,11 +3,13 @@ description: "记录开发实践与思考：Neovim、C/C++、Jekyll、电机控�
 lang: zh-CN
 url: https://magic-alt.github.io
 baseurl: ""
-theme: minima
+
+# 作者信息
 author:
   name: Kaermaxc
-  email: you@example.com
+  email: kaermaxc@example.com  # 建议填写真实邮箱
   url: https://magic-alt.github.io
+
 timezone: Asia/Shanghai
 
 # 站点 Logo（用于 SEO 与社交分享）
@@ -17,18 +19,40 @@ logo: /assets/images/logo.svg
 twitter:
   username: magic_alt
 
+# 固定链接格式
 permalink: /:categories/:title/
 
-paginate: 5
+# 分页设置
+paginate: 8
 paginate_path: "/page:num/"
 
-# SEO 与站长验证
+# GitHub Pages 支持的插件
 plugins:
+  - jekyll-remote-theme      # 远程主题支持
   - jekyll-feed
   - jekyll-paginate
-  - jekyll-seo-tag      # 自动注入 SEO 元信息与结构化数据
-  - jekyll-sitemap      # 自动生成 /sitemap.xml
+  - jekyll-seo-tag           # 自动注入 SEO 元信息与结构化数据
+  - jekyll-sitemap           # 自动生成 /sitemap.xml
   - jekyll-last-modified-at  # 自动追踪文件最后修改时间
+
+# 远程主题（可选，注释掉则使用自定义样式）
+# remote_theme: pages-themes/cayman
+# 或保持当前自定义样式，注释掉上面一行
+
+# Algolia 搜索配置（需要注册 Algolia 账号）
+algolia:
+  application_id: "YOUR_APP_ID"           # 替换为你的 Algolia Application ID
+  index_name: "YOUR_INDEX_NAME"           # 替换为你的索引名称
+  search_only_api_key: "YOUR_SEARCH_KEY"  # 替换为你的 Search-Only API Key
+
+# Talkyard 评论系统配置
+talkyard:
+  server_url: "https://comments-for-jekyll-demo.talkyard.net"  # 替换为你的 Talkyard 服务器
+  site_id: "jekyll-demo"                                        # 替换为你的站点 ID
+
+# Formspree 表单配置
+formspree:
+  form_id: "YOUR_FORM_ID"  # 替换为你的 Formspree 表单 ID
 
 # 站长验证（填入验证码）
 webmaster_verifications:

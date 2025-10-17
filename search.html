@@ -1,0 +1,270 @@
+---
+layout: default
+title: 搜索
+permalink: /search/
+---
+
+<section class="search-page">
+  <h1>搜索文章</h1>
+  <p>在这里搜索博客的所有文章</p>
+
+  <div id="search-container">
+    <div id="search-box"></div>
+    <div id="search-stats"></div>
+    <div id="search-hits"></div>
+    <div id="search-pagination"></div>
+  </div>
+</section>
+
+<!-- Algolia InstantSearch CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@8/themes/algolia-min.css">
+
+<!-- Algolia 库 -->
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+
+<script>
+(function() {
+  // 检查配置
+  var appId = '{{ site.algolia.application_id }}';
+  var searchKey = '{{ site.algolia.search_only_api_key }}';
+  var indexName = '{{ site.algolia.index_name }}';
+
+  if (!appId || appId === 'YOUR_APP_ID' || !searchKey || !indexName) {
+    document.getElementById('search-container').innerHTML = 
+      '<div style="padding: 2rem; background: #fef3c7; border-radius: 8px; margin-top: 2rem;">' +
+      '<h3>⚠️ 搜索功能未配置</h3>' +
+      '<p>请在 <code>_config.yml</code> 中配置 Algolia 参数：</p>' +
+      '<ul>' +
+      '<li><code>application_id</code></li>' +
+      '<li><code>search_only_api_key</code></li>' +
+      '<li><code>index_name</code></li>' +
+      '</ul>' +
+      '<p>配置步骤请参考仓库根目录的 <code>ADVANCED-FEATURES-SETUP.md</code></p>' +
+      '</div>';
+    return;
+  }
+
+  // 初始化 Algolia
+  const searchClient = algoliasearch(appId, searchKey);
+  
+  const search = instantsearch({
+    indexName: indexName,
+    searchClient: searchClient,
+    routing: true,
+  });
+
+  // 搜索框
+  search.addWidgets([
+    instantsearch.widgets.searchBox({
+      container: '#search-box',
+      placeholder: '搜索文章标题、内容、标签...',
+      showSubmit: false,
+      showReset: true,
+      showLoadingIndicator: true,
+      cssClasses: {
+        root: 'search-box-root',
+        form: 'search-box-form',
+        input: 'search-box-input',
+      },
+    })
+  ]);
+
+  // 搜索统计
+  search.addWidgets([
+    instantsearch.widgets.stats({
+      container: '#search-stats',
+      templates: {
+        text(data) {
+          let count = '';
+          if (data.hasManyResults) {
+            count = `找到 ${data.nbHits} 篇文章`;
+          } else if (data.hasOneResult) {
+            count = '找到 1 篇文章';
+          } else {
+            count = '没有找到结果';
+          }
+          return `${count}（用时 ${data.processingTimeMS}ms）`;
+        },
+      },
+    })
+  ]);
+
+  // 搜索结果
+  search.addWidgets([
+    instantsearch.widgets.hits({
+      container: '#search-hits',
+      templates: {
+        item(hit, { html, components }) {
+          const url = hit.url || hit.permalink || `/${hit.objectID}/`;
+          const title = components.Highlight({ hit, attribute: 'title' });
+          const excerpt = hit.excerpt || hit.content || '';
+          const excerptText = excerpt.toString().substring(0, 200);
+          const date = hit.date ? new Date(hit.date * 1000).toLocaleDateString('zh-CN') : '';
+          const tags = hit.tags || [];
+          
+          return html`
+            <article class="search-hit">
+              <h2 class="hit-title">
+                <a href="${url}">${title}</a>
+              </h2>
+              ${date ? html`<p class="hit-date">${date}</p>` : ''}
+              <p class="hit-excerpt">${excerptText}...</p>
+              ${tags.length > 0 ? html`
+                <div class="hit-tags">
+                  ${tags.map(tag => html`<span class="hit-tag">#${tag}</span>`)}
+                </div>
+              ` : ''}
+            </article>
+          `;
+        },
+        empty(results, { html }) {
+          return html`
+            <div class="no-results">
+              <p>未找到包含 <strong>${results.query}</strong> 的文章</p>
+              <p>建议：</p>
+              <ul>
+                <li>检查拼写</li>
+                <li>尝试不同的关键词</li>
+                <li>使用更通用的词汇</li>
+              </ul>
+            </div>
+          `;
+        },
+      },
+    })
+  ]);
+
+  // 分页
+  search.addWidgets([
+    instantsearch.widgets.pagination({
+      container: '#search-pagination',
+      padding: 2,
+      showFirst: false,
+      showLast: false,
+      scrollTo: '#search-box',
+    })
+  ]);
+
+  // 启动搜索
+  search.start();
+})();
+</script>
+
+<style>
+.search-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+#search-container {
+  margin-top: 2rem;
+}
+
+/* 搜索框样式 */
+.search-box-form {
+  margin-bottom: 2rem;
+}
+
+.search-box-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  transition: border-color 0.2s;
+}
+
+.search-box-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* 统计信息 */
+#search-stats {
+  margin-bottom: 1.5rem;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+/* 搜索结果 */
+.search-hit {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  transition: box-shadow 0.2s;
+}
+
+.search-hit:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+.hit-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+}
+
+.hit-title a {
+  color: #111827;
+  text-decoration: none;
+}
+
+.hit-title a:hover {
+  color: #667eea;
+}
+
+.hit-date {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.hit-excerpt {
+  color: #374151;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.hit-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.hit-tag {
+  background: #f3f4f6;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: #667eea;
+}
+
+/* 空结果 */
+.no-results {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #6b7280;
+}
+
+.no-results ul {
+  text-align: left;
+  max-width: 300px;
+  margin: 1rem auto;
+}
+
+/* 分页 */
+.ais-Pagination {
+  margin-top: 2rem;
+}
+
+/* 高亮 */
+.ais-Highlight-highlighted {
+  background: #fef08a;
+  font-style: normal;
+  font-weight: 600;
+}
+</style>

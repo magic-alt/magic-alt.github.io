@@ -1,0 +1,31 @@
+<!-- Talkyard 评论系统 -->
+<div id="talkyard-comments" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb;"></div>
+
+<script>
+  (function() {
+    var talkyardServerUrl = {{ site.talkyard.server_url | jsonify }};
+    var talkyardSiteId = {{ site.talkyard.site_id | jsonify }};
+    
+    if (!talkyardServerUrl || !talkyardSiteId) {
+      document.getElementById('talkyard-comments').innerHTML = 
+        '<p style="color: #888;">评论系统未配置，请在 _config.yml 中设置 Talkyard 参数。</p>';
+      return;
+    }
+    
+    var d = document;
+    var s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = talkyardServerUrl + '/-/talkyard-comments.min.js';
+    s.setAttribute('data-talkyard-site-id', talkyardSiteId);
+    
+    // 可选：指定讨论 ID（默认使用页面 URL）
+    // s.setAttribute('data-discussion-id', '{{ page.id }}');
+    
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+<noscript>
+  <p style="color: #888;">请启用 JavaScript 以查看评论。或访问 <a href="{{ site.talkyard.server_url }}" target="_blank">Talkyard</a> 查看讨论。</p>
+</noscript>

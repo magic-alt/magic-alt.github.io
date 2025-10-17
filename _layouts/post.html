@@ -56,6 +56,12 @@ layout: default
     <p class="post-share">欢迎分享给同样感兴趣的朋友，或通过 <a href="mailto:{{ site.author.email }}">邮件</a> 与我交流。</p>
   </footer>
 </article>
+
+<!-- 评论系统 -->
+{% if page.comments != false %}
+  {% include talkyard.html %}
+{% endif %}
+
 <section class="post-pagination" aria-label="文章分页导航">
   {% if page.previous %}
   <a class="post-previous" href="{{ page.previous.url | relative_url }}">← {{ page.previous.title }}</a>

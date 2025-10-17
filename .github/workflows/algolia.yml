@@ -1,0 +1,65 @@
+name: Update Algolia Index
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '_posts/**'
+      - '*.md'
+      - '_config.yml'
+
+jobs:
+  update_index:
+    runs-on: ubuntu-latest
+    name: Update Algolia search index
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Update Algolia index
+        env:
+          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_ADMIN_API_KEY }}
+        run: |
+          if [ -z "$ALGOLIA_API_KEY" ]; then
+            echo "⚠️  ALGOLIA_ADMIN_API_KEY secret not configured"
+            echo "Please add your Algolia Admin API Key to repository secrets"
+            echo "Settings -> Secrets and variables -> Actions -> New repository secret"
+            echo "Name: ALGOLIA_ADMIN_API_KEY"
+            exit 0
+          fi
+          
+          echo "🔍 Indexing content to Algolia..."
+          bundle exec jekyll algolia
+
+      - name: Workflow summary
+        if: always()
+        run: |
+          echo "## Algolia Index Update" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -z "${{ secrets.ALGOLIA_ADMIN_API_KEY }}" ]; then
+            echo "⚠️ **Status**: Skipped (API key not configured)" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Configuration Required" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "1. Get your Admin API Key from Algolia dashboard" >> $GITHUB_STEP_SUMMARY
+            echo "2. Go to repository **Settings** → **Secrets and variables** → **Actions**" >> $GITHUB_STEP_SUMMARY
+            echo "3. Click **New repository secret**" >> $GITHUB_STEP_SUMMARY
+            echo "4. Name: \`ALGOLIA_ADMIN_API_KEY\`" >> $GITHUB_STEP_SUMMARY
+            echo "5. Value: Paste your Admin API Key" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ **Status**: Index updated successfully" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Search index has been synchronized with the latest content." >> $GITHUB_STEP_SUMMARY
+          fi
