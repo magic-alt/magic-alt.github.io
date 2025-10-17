@@ -1,24 +1,62 @@
 ---
 layout: default
 ---
+{% assign words = content | number_of_words %}
+{% assign minutes = words | divided_by: 350 %}
+{% if minutes == 0 %}
+  {% assign minutes = 1 %}
+{% endif %}
 <article class="post">
-  <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
+  <header class="post-hero">
     <p class="post-meta">
       <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
-      {% if page.tags %}
-      · 标签：
-      {% for tag in page.tags %}
-        <a class="post-tag" href="{{ '/tags/#' | append: (tag | slugify) }}">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
-      {% endfor %}
-      {% endif %}
+      <span class="post-reading">约 {{ minutes }} 分钟读完</span>
     </p>
+    <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.excerpt %}
+    <p class="post-lede">{{ page.excerpt | strip_html | strip_newlines }}</p>
+    {% endif %}
+    {% if page.tags %}
+    <ul class="post-tag-list">
+      {% for tag in page.tags %}
+      <li><a href="{{ ('/tags/#' | append: (tag | slugify)) | relative_url }}">#{{ tag }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
   </header>
-  <div class="post-content">
-    {{ content }}
+  <div class="post-body">
+    <div class="post-content">
+      {{ content }}
+    </div>
+    <aside class="post-aside" aria-label="文章信息">
+      <div class="post-aside-card">
+        <h2>写作信息</h2>
+        <dl>
+          <div>
+            <dt>发布时间</dt>
+            <dd>{{ page.date | date: "%Y-%m-%d" }}</dd>
+          </div>
+          <div>
+            <dt>阅读预估</dt>
+            <dd>约 {{ minutes }} 分钟 · {{ words }} 字</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="post-aside-card">
+        <h2>继续探索</h2>
+        <ul>
+          <li><a href="{{ "/archive/" | relative_url }}">浏览归档</a></li>
+          <li><a href="{{ "/tags/" | relative_url }}">查找相关主题</a></li>
+          <li><a href="{{ "/feed.xml" | relative_url }}">订阅最新文章</a></li>
+        </ul>
+      </div>
+    </aside>
   </div>
+  <footer class="post-footer">
+    <p class="post-share">欢迎分享给同样感兴趣的朋友，或通过 <a href="mailto:{{ site.author.email }}">邮件</a> 与我交流。</p>
+  </footer>
 </article>
-<section class="post-pagination">
+<section class="post-pagination" aria-label="文章分页导航">
   {% if page.previous %}
   <a class="post-previous" href="{{ page.previous.url | relative_url }}">← {{ page.previous.title }}</a>
   {% endif %}

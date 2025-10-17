@@ -6,19 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines }}">
+  <meta name="theme-color" content="#0f172a">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | relative_url }}">
   <link rel="stylesheet" href="{{ "/assets/css/styles.css" | relative_url }}">
 </head>
-<body>
-  <header class="site-header">
-    <div class="wrapper">
-      <a class="site-title" href="{{ "/" | relative_url }}">{{ site.title }}</a>
-      <nav class="site-nav">
-        <a href="{{ "/" | relative_url }}">首页</a>
-        <a href="{{ "/archive/" | relative_url }}">归档</a>
-        <a href="{{ "/tags/" | relative_url }}">标签</a>
-        <a href="{{ "/about/" | relative_url }}">关于</a>
+<body class="layout-{{ page.layout | default: 'default' }}{% if page.body_class %} {{ page.body_class }}{% endif %}">
+  <a class="skip-link" href="#main-content">跳至正文</a>
+  <header class="site-header" role="banner">
+    <div class="wrapper header-grid">
+      <div class="site-brand">
+        <a class="site-title" href="{{ "/" | relative_url }}">{{ site.title }}</a>
+        <p class="site-subtitle">{{ site.description | truncate: 70 }}</p>
+      </div>
+      <nav class="site-nav" aria-label="主导航">
+        <ul>
+          <li><a href="{{ "/" | relative_url }}" {% if page.url == "/" %}aria-current="page"{% endif %}>首页</a></li>
+          <li><a href="{{ "/archive/" | relative_url }}" {% if page.url == "/archive/" %}aria-current="page"{% endif %}>归档</a></li>
+          <li><a href="{{ "/tags/" | relative_url }}" {% if page.url == "/tags/" %}aria-current="page"{% endif %}>标签</a></li>
+          <li><a href="{{ "/about/" | relative_url }}" {% if page.url == "/about/" %}aria-current="page"{% endif %}>关于</a></li>
+        </ul>
+        <a class="nav-cta" href="{{ "/feed.xml" | relative_url }}">订阅 RSS</a>
       </nav>
     </div>
   </header>
-  <main class="site-main wrapper">
+  <div class="site-shell">
+    <main id="main-content" class="site-main wrapper" role="main">
