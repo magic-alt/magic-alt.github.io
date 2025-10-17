@@ -4,18 +4,12 @@ description: >-
 lang: zh-CN
 url: https://magic-alt.github.io
 baseurl: ""
+theme: minima
 author:
   name: Kaermaxc
   email: you@example.com
 timezone: Asia/Shanghai
 
-defaults:
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: post
-      author: Kaermaxc
 permalink: /:categories/:title/
 
 paginate: 5
@@ -25,10 +19,23 @@ plugins:
   - jekyll-feed
   - jekyll-paginate
 
+mathjax: true
+
 markdown: kramdown
 kramdown:
   input: GFM
   hard_wrap: false
+  math_engine: mathjax
+
+highlighter: rouge
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      author: Kaermaxc
+      toc: true
 
 sass:
   style: compressed
