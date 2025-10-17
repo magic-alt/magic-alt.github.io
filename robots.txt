@@ -7,4 +7,4 @@ Sitemap: https://magic-alt.github.io/sitemap.xml
 # 禁止抓取的目录（可选）
 Disallow: /assets/
 
-Algolia-Crawler-Verif: 54CEFA20B860E64D
+# Algolia-Crawler-Verif: 54CEFA20B860E64D

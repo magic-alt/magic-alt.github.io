@@ -818,10 +818,10 @@ return {
 我的完整配置已开源在 GitHub，包含更多插件和细节：
 
 ```bash
-git clone https://github.com/yourusername/nvim-config.git ~/.config/nvim
+git clone https://github.com/magic-alt/nvim-cpp-ide.git ~/.config/nvim
 ```
 
-（根据实际情况替换链接）
+> 该仓库包含完整的 Neovim C/C++ IDE 配置，开箱即用。
 
 ## 总结
 

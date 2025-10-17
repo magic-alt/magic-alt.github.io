@@ -1,9 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@500;600;700&display=swap");
+/* 字体通过 head.html 的 <link> 标签加载，避免 @import 阻塞渲染 */
 
 :root {
   color-scheme: light;
-  --font-sans: "Inter", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-serif: "Source Serif 4", "Noto Serif SC", serif;
+  --font-sans: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-serif: "Merriweather", "Noto Serif SC", Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
   --color-bg: #f8fafc;
   --color-surface: #ffffff;
   --color-surface-alt: #eef2ff;
@@ -103,10 +104,11 @@ pre {
   padding: 1.25rem;
   overflow-x: auto;
   font-size: 0.9rem;
+  font-family: var(--font-mono);
 }
 
 code {
-  font-family: "Fira Code", "JetBrains Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: var(--font-mono);
   background: var(--color-code-bg);
   border-radius: 0.5rem;
   padding: 0.15rem 0.45rem;
