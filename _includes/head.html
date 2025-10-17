@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang }}">
+<html lang="{{ page.lang | default: site.lang | default: 'zh-Hans' }}">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +10,21 @@
   
   <!-- Canonical URL -->
   <link rel="canonical" href="{{ page.url | absolute_url }}">
+  
+  <!-- 站点级别的结构化数据 (Person Schema) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{ site.author.name }}",
+    "url": "{{ site.url }}{{ site.baseurl }}",
+    "sameAs": [
+      "https://github.com/magic-alt"
+    ],
+    "jobTitle": "Developer & Technical Writer",
+    "description": "{{ site.description }}"
+  }
+  </script>
   
   <meta name="theme-color" content="#0f172a">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | absolute_url }}">

@@ -5,6 +5,7 @@
 ### 1. 核心插件配置
 - ✅ **jekyll-seo-tag**: 自动生成 SEO 元信息、Open Graph、Twitter Card、JSON-LD 结构化数据
 - ✅ **jekyll-sitemap**: 自动生成 `/sitemap.xml`
+- ✅ **jekyll-last-modified-at**: 自动追踪文件修改时间，增强 sitemap lastmod
 - ✅ 已添加到 `_config.yml` 和 `Gemfile`
 
 ### 2. 站点元信息 (_config.yml)
@@ -32,6 +33,21 @@ author:
 - ✅ 创建了 `/assets/images/logo.svg`
 - ✅ 包含 K 字母设计，紫色渐变背景
 - ✅ 适用于社交分享和 SEO
+
+### 6. IndexNow 自动推送 (新增)
+- ✅ 创建了 GitHub Action: `.github/workflows/indexnow.yml`
+- ✅ 自动检测文章更新并通知 Bing/Yandex
+- ✅ 加速 Bing 生态的索引速度
+- ⚠️ 需要配置 INDEXNOW_KEY（见 INDEXNOW-SETUP.md）
+
+### 7. 站点级结构化数据 (新增)
+- ✅ 在 `head.html` 添加了 Person Schema JSON-LD
+- ✅ 包含作者信息、GitHub 链接等
+- ✅ 增强搜索引擎对站点主体的理解
+
+### 8. 语言标签优化 (新增)
+- ✅ HTML lang 属性设置为 `zh-Hans`
+- ✅ 帮助搜索引擎正确识别中文内容
 
 ---
 

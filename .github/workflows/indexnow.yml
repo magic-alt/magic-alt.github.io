@@ -1,0 +1,88 @@
+name: IndexNow - 通知搜索引擎索引更新
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '_posts/**'
+      - '*.md'
+      - '_config.yml'
+
+jobs:
+  notify-indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # 获取最近两次提交以便比较变化
+      
+      - name: Get changed files
+        id: changed-files
+        run: |
+          # 获取变更的文件列表
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E '^_posts/.*\.md$|^.*\.md$' || true)
+          
+          # 构建 URL 列表
+          URLS=""
+          for file in $CHANGED_FILES; do
+            if [[ $file == _posts/* ]]; then
+              # 从文件名提取 slug: _posts/2024-10-17-neovim-cpp-setup.md -> neovim-cpp-setup
+              filename=$(basename "$file" .md)
+              slug=$(echo "$filename" | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}-//')
+              URLS="$URLS https://magic-alt.github.io/$slug/"
+            fi
+          done
+          
+          # 去重并格式化
+          URLS=$(echo "$URLS" | tr ' ' '\n' | sort -u | tr '\n' ' ' | sed 's/ $//')
+          echo "urls=$URLS"
+          echo "urls=$URLS" >> $GITHUB_OUTPUT
+      
+      - name: Submit to IndexNow
+        if: steps.changed-files.outputs.urls != ''
+        run: |
+          # IndexNow API 端点（Bing/Yandex 都支持）
+          INDEXNOW_ENDPOINT="https://api.indexnow.org/indexnow"
+          
+          # 你需要生成一个 IndexNow key（任意 UUID 格式字符串）
+          # 建议在 GitHub Secrets 中设置 INDEXNOW_KEY
+          # 或者使用固定值（需要在网站根目录放置对应的验证文件）
+          INDEXNOW_KEY="${{ secrets.INDEXNOW_KEY }}"
+          
+          # 如果没有设置 secret，使用示例 key（需要创建验证文件）
+          if [ -z "$INDEXNOW_KEY" ]; then
+            INDEXNOW_KEY="your-indexnow-key-here"
+            echo "⚠️  警告: 未设置 INDEXNOW_KEY secret，使用默认值"
+            echo "请访问 https://www.indexnow.org/ 了解如何生成和验证 key"
+          fi
+          
+          # 提交每个 URL
+          for url in ${{ steps.changed-files.outputs.urls }}; do
+            echo "📤 提交 URL: $url"
+            
+            curl -X POST "$INDEXNOW_ENDPOINT" \
+              -H "Content-Type: application/json" \
+              -d "{
+                \"host\": \"magic-alt.github.io\",
+                \"key\": \"$INDEXNOW_KEY\",
+                \"urlList\": [\"$url\"]
+              }" || echo "❌ 提交失败: $url"
+            
+            sleep 1  # 避免过快请求
+          done
+          
+          echo "✅ IndexNow 通知完成"
+      
+      - name: Summary
+        if: steps.changed-files.outputs.urls != ''
+        run: |
+          echo "## IndexNow 提交摘要" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "已通知以下 URL 更新：" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          for url in ${{ steps.changed-files.outputs.urls }}; do
+            echo "- $url" >> $GITHUB_STEP_SUMMARY
+          done
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔍 Bing/Yandex 将在几小时内重新抓取这些页面" >> $GITHUB_STEP_SUMMARY
