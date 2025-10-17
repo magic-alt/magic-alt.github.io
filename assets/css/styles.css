@@ -1,6 +1,9 @@
 /* 字体通过 head.html 的 <link> 标签加载，避免 @import 阻塞渲染 */
 
 :root {
+  /* 字体栈校验：正文无衬线 Inter + Noto Sans SC，长文阅读可切换 serif；代码块 JetBrains Mono/Fira Code */
+  /* UI/导航/按钮继承正文 sans，不需单独声明，必要处补充选择器保证一致性 */
+
   color-scheme: light;
   --font-sans: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   --font-serif: "Merriweather", "Noto Serif SC", Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
@@ -42,6 +45,24 @@ html[data-theme="dark"] {
   --color-header: rgba(15, 23, 42, 0.85);
   --shadow-card: 0 24px 56px rgba(8, 11, 19, 0.55);
 }
+
+/* ===== 阅读模式：将正文切换为衬线（长文更舒适） =====
+ * 使用方式（任选其一）：
+ *  1) 在页面/文章容器上加类名 .reading-serif
+ *  2) 给 <html> 设置 data-reading="serif"
+ *  3) 给文章 <article class="post"> 加上 .reading-serif
+ */
+.reading-serif,
+.reading-serif body,
+.reading-serif .post,
+.post.reading-serif,
+html[data-reading="serif"] body {
+  font-family: var(--font-serif);
+}
+
+/* 确保代码区仍用等宽字体 */
+.reading-serif pre,
+.reading-serif code { font-family: var(--font-mono); }
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -87,6 +108,9 @@ h6 {
   margin-top: 0;
   color: inherit;
 }
+
+/* UI/导航/按钮：确保使用无衬线（Inter 系） */
+.site-nav, .nav-cta, .hero-button, button, input, select, textarea { font-family: var(--font-sans); }
 
 p {
   margin: 0 0 1.2rem;

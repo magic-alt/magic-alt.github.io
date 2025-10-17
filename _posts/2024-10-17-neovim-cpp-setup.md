@@ -2,7 +2,9 @@
 title: 打造高效 Neovim C/C++ 开发环境：从零到一的完整指南
 date: 2024-10-17 10:00:00 +0800
 tags: [Neovim, C++, 开发环境, LSP]
-excerpt: "详细讲解如何从零开始配置 Neovim，打造媲美 IDE 的 C/C++ 开发体验，包括 LSP、自动补全、调试、格式化等核心功能。"
+excerpt: "用 clangd + Treesitter 打造 IDE 级体验，覆盖补全/诊断/调试/格式化/构建；修正 GDB/Lldb 适配，提供 Windows 与 CMake 指南。"
+layout: post
+comments: true
 ---
 
 作为一个追求效率的开发者，我一直在寻找一个轻量、快速、可高度定制的编辑器。在尝试了各种 IDE 和编辑器后，我最终选择了 Neovim，并成功打造了一套完整的 C/C++ 开发环境。这篇文章将分享我的配置经验，帮你快速上手。
@@ -445,6 +447,7 @@ return {
     "rcarriga/nvim-dap-ui",
     "nvim-neotest/nvim-nio",
     "theHamsta/nvim-dap-virtual-text",
+    -- 如使用 LLDB：需要系统安装 lldb；如偏好 cpptools（Windows 友好），见下方"cppdbg"
   },
   keys = {
     { "<F5>", function() require("dap").continue() end, desc = "Debug: Continue" },
@@ -473,27 +476,49 @@ return {
       dapui.close()
     end
 
-    -- C/C++ 调试配置 (GDB)
-    dap.adapters.cppdbg = {
-      id = "cppdbg",
+    -- 方案 A：LLDB（Linux/macOS 原生良好）
+    dap.adapters.lldb = {
       type = "executable",
-      command = "gdb",
-      args = { "-i", "dap" },
+      command = "lldb-vscode", -- 一般随 lldb 安装
+      name = "lldb",
     }
-
     dap.configurations.cpp = {
       {
-        name = "Launch file",
-        type = "cppdbg",
+        name = "Debug (LLDB)",
+        type = "lldb",
         request = "launch",
         program = function()
           return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
         end,
         cwd = "${workspaceFolder}",
-        stopAtEntry = false,
+        stopOnEntry = false,
+        args = {},
       },
     }
     dap.configurations.c = dap.configurations.cpp
+
+    -- 方案 B：cppdbg（VS Code cpptools 适配，Windows/跨平台）
+    -- 安装 Microsoft 'cpptools'，获取 OpenDebugAD7 可执行文件路径并替换下面的 command
+    -- local cpptools = "/path/to/OpenDebugAD7"
+    -- dap.adapters.cppdbg = {
+    --   id = "cppdbg",
+    --   type = "executable",
+    --   command = cpptools,
+    --   options = { detached = false },
+    -- }
+    -- table.insert(dap.configurations.cpp, {
+    --   name = "Debug (cppdbg)",
+    --   type = "cppdbg",
+    --   request = "launch",
+    --   program = function()
+    --     return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+    --   end,
+    --   cwd = "${workspaceFolder}",
+    --   MIMode = "gdb", -- 或 "lldb"
+    --   setupCommands = {
+    --     { text = "-enable-pretty-printing", description = "pretty print", ignoreFailures = true },
+    --   },
+    -- })
   end,
 }
 ```
@@ -838,3 +863,66 @@ git clone https://github.com/magic-alt/nvim-cpp-ide.git ~/.config/nvim
 相比传统 IDE，Neovim 配置更灵活、启动更快、资源占用更低。虽然初期需要投入时间学习，但一旦掌握，你将拥有一个完全按照自己习惯定制的开发环境。
 
 如果你在配置过程中遇到问题，欢迎在评论区交流，或者参考 [Neovim 官方文档](https://neovim.io/doc/) 和社区资源。Happy Coding! 🚀
+
+---
+
+## Windows 专项提示
+
+1. **工具链**：首选 LLVM/Clang + lldb（choco/scoop 可得），或 MSVC + cpptools（cppdbg）。  
+2. **编译数据库**：CMake 生成的 `build/compile_commands.json` 在 Windows 可用 `mklink` 建软链接：  
+   ```bat
+   mklink compile_commands.json .\build\compile_commands.json
+   ```  
+3. **路径与编码**：确保 `shell` 使用 UTF-8，PowerShell 里：`[Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()`。
+
+## CMake Presets 与构建一键化
+
+在项目根加入 `CMakePresets.json`（示例）：
+
+```json
+{
+  "version": 3,
+  "cmakeMinimumRequired": { "major": 3, "minor": 20 },
+  "configurePresets": [
+    {
+      "name": "dev",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    }
+  ],
+  "buildPresets": [{ "name": "dev", "configurePreset": "dev" }]
+}
+```
+
+Neovim 内可配合 `Civitasv/cmake-tools.nvim`：  
+`<leader>cg` 配置、`<leader>cb` 构建、`<leader>cr` 运行。
+
+## clangd 体验升级参数
+
+在 `lspconfig.clangd.setup` 中建议启用：
+
+```lua
+cmd = {
+  "clangd",
+  "--background-index",
+  "--clang-tidy",
+  "--header-insertion=never", -- 避免自动插入不需要的头
+  "--completion-style=detailed",
+  "--function-arg-placeholders",
+  "--fallback-style=llvm",
+}
+```
+
+## 常见故障排查（速查表）
+
+| 现象 | 排查点 | 处理 |
+|---|---|---|
+| 补全失效 | `:LspInfo` 看 clangd 是否 attached | 检查 `compile_commands.json`、根目录是否一致 |
+| 跳转慢 | 后台索引未完成 | 等待 `clangd` 后台索引；排除巨型目录 |
+| 调试断点不生效 | 可执行无符号表 | 使用 `-g` 或 `-DCMAKE_BUILD_TYPE=Debug` 重新构建 |
+| 终端中文乱码 | 终端编码/字体 | 统一 UTF-8，选择等宽字体（JetBrains Mono） |
+| Mason 安装失败 | 网络问题/权限不足 | 使用代理或手动下载 LSP 二进制文件 |
