@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: 'zh-Hans' }}">
+<html lang="{{ page.lang | default: site.lang | default: 'zh-Hans' }}" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- SEO 标签：自动生成 title, description, OG, Twitter Card, JSON-LD 等 -->
+
   {% seo %}
-  
-  <!-- Canonical URL -->
+
   <link rel="canonical" href="{{ page.url | absolute_url }}">
-  
-  <!-- 站点级别的结构化数据 (Person Schema) -->
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -25,12 +22,29 @@
     "description": "{{ site.description }}"
   }
   </script>
-  
-  <meta name="theme-color" content="#0f172a">
+
+  <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f8fafc">
+
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | absolute_url }}">
   <link rel="stylesheet" href="{{ "/assets/css/styles.css" | relative_url }}">
-  
-  <!-- MathJax Configuration -->
+
+  <script>
+    (function () {
+      var storageKey = 'pref-theme';
+      var root = document.documentElement;
+      var storedTheme = localStorage.getItem(storageKey);
+      if (storedTheme) {
+        root.dataset.theme = storedTheme;
+        return;
+      }
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.dataset.theme = prefersDark ? 'dark' : 'light';
+    })();
+  </script>
+
+  {% if page.math or site.mathjax %}
   <script>
     MathJax = {
       tex: {
@@ -44,7 +58,8 @@
       }
     };
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script"></script>
+  {% endif %}
 </head>
 <body class="layout-{{ page.layout | default: 'default' }}{% if page.body_class %} {{ page.body_class }}{% endif %}">
   <a class="skip-link" href="#main-content">跳至正文</a>
@@ -60,7 +75,17 @@
           <li><a href="{{ "/archive/" | relative_url }}" {% if page.url == "/archive/" %}aria-current="page"{% endif %}>归档</a></li>
           <li><a href="{{ "/about/" | relative_url }}" {% if page.url == "/about/" %}aria-current="page"{% endif %}>关于</a></li>
         </ul>
-        <a class="nav-cta" href="{{ "/feed.xml" | relative_url }}">订阅 RSS</a>
+        <div class="nav-actions">
+          <a class="nav-cta" href="{{ "/feed.xml" | relative_url }}">订阅 RSS</a>
+          <button class="theme-toggle" type="button" aria-label="切换主题">
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 4.75a.75.75 0 0 1-.75-.75V2.5a.75.75 0 1 1 1.5 0V4a.75.75 0 0 1-.75.75Zm6.364 2.136a.75.75 0 0 0 1.06-1.06l-1.06-1.06a.75.75 0 0 0-1.06 1.06l1.06 1.06ZM21.5 11.25H20a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5ZM12 19.25a.75.75 0 0 0-.75.75V22a.75.75 0 0 0 1.5 0v-2a.75.75 0 0 0-.75-.75Zm-7.424-3.364-.03.03a.75.75 0 1 0 1.06 1.06l1.03-1.03a.75.75 0 0 0-1.06-1.06Zm1.03-9.546-1.03-1.03a.75.75 0 1 0-1.06 1.06l1.03 1.03a.75.75 0 1 0 1.06-1.06ZM4 12a.75.75 0 0 0-.75-.75H2.5a.75.75 0 0 0 0 1.5H3.25A.75.75 0 0 0 4 12Zm12.495 6.284 1.06 1.06a.75.75 0 0 0 1.06-1.06l-1.06-1.06a.75.75 0 0 0-1.06 1.06ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Z"></path>
+            </svg>
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M13.25 3.018a.75.75 0 0 1 .91-.91 9.25 9.25 0 1 1-10.232 10.23.75.75 0 0 1 .91-.91A7.75 7.75 0 1 0 13.25 3.018Z"></path>
+            </svg>
+          </button>
+        </div>
       </nav>
     </div>
   </header>

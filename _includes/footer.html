@@ -27,8 +27,45 @@
       <p>&copy; {{ site.time | date: "%Y" }} {{ site.title }} · 借助 Jekyll 与开源主题生态构建</p>
     </div>
   </footer>
-  {% if page.math or site.mathjax %}
-  <script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  {% endif %}
+  <script>
+    (function () {
+      var storageKey = 'pref-theme';
+      var root = document.documentElement;
+      var toggle = document.querySelector('.theme-toggle');
+      var metaTheme = document.querySelector('meta[name="theme-color"]:not([media])');
+      var mediaQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+
+      function setTheme(theme, persist) {
+        root.dataset.theme = theme;
+        if (metaTheme) {
+          metaTheme.setAttribute('content', theme === 'dark' ? '#0f172a' : '#f8fafc');
+        }
+        if (persist) {
+          try {
+            localStorage.setItem(storageKey, theme);
+          } catch (err) {
+            console.warn('无法保存主题偏好', err);
+          }
+        }
+      }
+
+      setTheme(root.dataset.theme || 'light', false);
+
+      if (toggle) {
+        toggle.addEventListener('click', function () {
+          var nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+          setTheme(nextTheme, true);
+        });
+      }
+
+      if (mediaQuery) {
+        mediaQuery.addEventListener('change', function (event) {
+          if (!localStorage.getItem(storageKey)) {
+            setTheme(event.matches ? 'dark' : 'light', false);
+          }
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
