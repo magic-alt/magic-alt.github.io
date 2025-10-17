@@ -1,6 +1,5 @@
-title: Kaermaxc Blog
-description: >-
-  分享日常开发、创意与学习笔记的个人博客。
+title: "Kaermaxc Blog - 日复一日"
+description: "记录开发实践与思考：Neovim、C/C++、Jekyll、电机控制与自动化。分享日常开发、创意与学习笔记。"
 lang: zh-CN
 url: https://magic-alt.github.io
 baseurl: ""
@@ -8,16 +7,32 @@ theme: minima
 author:
   name: Kaermaxc
   email: you@example.com
+  url: https://magic-alt.github.io
 timezone: Asia/Shanghai
+
+# 站点 Logo（用于 SEO 与社交分享）
+logo: /assets/images/logo.svg
+
+# Twitter / X 账号（可选，去掉 @）
+twitter:
+  username: magic_alt
 
 permalink: /:categories/:title/
 
 paginate: 5
 paginate_path: "/page:num/"
 
+# SEO 与站长验证
 plugins:
   - jekyll-feed
   - jekyll-paginate
+  - jekyll-seo-tag      # 自动注入 SEO 元信息与结构化数据
+  - jekyll-sitemap      # 自动生成 /sitemap.xml
+
+# 站长验证（填入验证码）
+webmaster_verifications:
+  google: ""   # Google Search Console 验证码
+  bing: ""     # Bing Webmaster Tools 验证码
 
 mathjax: true
 

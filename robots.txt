@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap 位置
+Sitemap: https://magic-alt.github.io/sitemap.xml
+
+# 禁止抓取的目录（可选）
+Disallow: /assets/

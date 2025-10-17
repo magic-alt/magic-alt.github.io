@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="letterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bgGrad)" rx="80"/>
+  
+  <!-- Letter K -->
+  <g fill="url(#letterGrad)">
+    <rect x="140" y="160" width="50" height="192" rx="10"/>
+    <rect x="190" y="240" width="140" height="50" rx="10" transform="rotate(-45 260 265)"/>
+    <rect x="190" y="272" width="140" height="50" rx="10" transform="rotate(45 260 297)"/>
+  </g>
+  
+  <!-- Accent dots -->
+  <circle cx="380" cy="180" r="20" fill="#FFD700" opacity="0.8"/>
+  <circle cx="360" cy="330" r="15" fill="#FFD700" opacity="0.6"/>
+  <circle cx="400" cy="280" r="12" fill="#FFD700" opacity="0.5"/>
+</svg>
