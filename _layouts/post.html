@@ -19,7 +19,7 @@ layout: default
     {% if page.tags %}
     <ul class="post-tag-list">
       {% for tag in page.tags %}
-      <li><a href="{{ ('/tags/#' | append: (tag | slugify)) | relative_url }}">#{{ tag }}</a></li>
+      <li><a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">#{{ tag }}</a></li>
       {% endfor %}
     </ul>
     {% endif %}

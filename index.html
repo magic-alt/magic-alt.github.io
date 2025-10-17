@@ -29,7 +29,7 @@ title: 最新文章
       {% if post.tags %}
       <ul class="post-card-tags">
         {% for tag in post.tags %}
-        <li><a href="{{ ('/tags/#' | append: (tag | slugify)) | relative_url }}">#{{ tag }}</a></li>
+        <li><a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">#{{ tag }}</a></li>
         {% endfor %}
       </ul>
       {% endif %}
@@ -42,7 +42,7 @@ title: 最新文章
   </section>
   <aside class="sidebar" aria-label="侧边栏">
     <div class="highlight-card">
-      <h2 class="highlight-title">FEATURE TAGS</h2>
+      <h2 class="highlight-title">标签</h2>
       {% if site.tags and site.tags.size > 0 %}
       <ul class="tag-cloud">
         {% assign tags_sorted = site.tags | sort %}
@@ -50,7 +50,7 @@ title: 最新文章
         {% assign tag_name = tag[0] %}
         {% assign tag_slug = tag_name | slugify %}
         <li>
-          <a class="tag-chip" href="{{ ('/tags/#' | append: tag_slug) | relative_url }}">#{{ tag_name }}
+          <a class="tag-chip" href="{{ '/tags/' | relative_url }}#{{ tag_slug }}">#{{ tag_name }}
             <span class="tag-count">{{ tag[1].size }}</span>
           </a>
         </li>
