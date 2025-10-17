@@ -7,7 +7,7 @@ baseurl: ""
 # 作者信息
 author:
   name: Kaermaxc
-  email: kaermaxc@example.com  # 建议填写真实邮箱
+  email: Kaermaxc@gmail.com  # 建议填写真实邮箱
   url: https://magic-alt.github.io
 
 timezone: Asia/Shanghai
@@ -41,9 +41,9 @@ plugins:
 
 # Algolia 搜索配置（需要注册 Algolia 账号）
 algolia:
-  application_id: "YOUR_APP_ID"           # 替换为你的 Algolia Application ID
-  index_name: "YOUR_INDEX_NAME"           # 替换为你的索引名称
-  search_only_api_key: "YOUR_SEARCH_KEY"  # 替换为你的 Search-Only API Key
+  application_id: "RT6C3M3J3Y"           # Algolia Application ID
+  index_name: "kaermaxc_blog"           # 索引名称
+  search_only_api_key: "6c8c5e520af94e8c02707b79a7e2d610"  #  Search-Only API Key
 
 # Talkyard 评论系统配置
 talkyard:
