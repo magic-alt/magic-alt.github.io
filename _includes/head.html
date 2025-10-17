@@ -9,6 +9,22 @@
   <meta name="theme-color" content="#0f172a">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | relative_url }}">
   <link rel="stylesheet" href="{{ "/assets/css/styles.css" | relative_url }}">
+  
+  <!-- MathJax Configuration -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
 </head>
 <body class="layout-{{ page.layout | default: 'default' }}{% if page.body_class %} {{ page.body_class }}{% endif %}">
   <a class="skip-link" href="#main-content">跳至正文</a>
