@@ -1,6 +1,6 @@
 ---
 title: 打造高效 Neovim C/C++ 开发环境：从零到一的完整指南
-date: 2024-10-17 10:00:00 +0800
+date: 2025-10-17 10:00:00 +0800
 tags: [Neovim, C++, 开发环境, LSP]
 excerpt: "用 clangd + Treesitter 打造 IDE 级体验，覆盖补全/诊断/调试/格式化/构建；修正 GDB/Lldb 适配，提供 Windows 与 CMake 指南。"
 layout: post
