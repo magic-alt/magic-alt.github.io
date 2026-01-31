@@ -1,16 +1,36 @@
 title: Magic Alt 的博客
 description: 使用 GitHub Pages 与 Jekyll 搭建的个人博客。
-author: Magic Alt
 lang: zh-CN
 timezone: Asia/Shanghai
 url: ""
 baseurl: ""
-theme: minima
+
+remote_theme: mmistakes/minimal-mistakes
+minimal_mistakes_skin: air
+
 plugins:
   - jekyll-feed
+  - jekyll-include-cache
+
+author:
+  name: Magic Alt
+
 permalink: /:categories/:year/:month/:day/:title/
 show_excerpts: true
-header_pages:
-  - index.md
-  - about.md
-  - tags.md
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: false
+      share: true
+      related: true
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single

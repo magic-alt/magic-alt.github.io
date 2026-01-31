@@ -1,6 +1,6 @@
 # magic-alt.github.io
 
-使用 Jekyll 与 GitHub Pages 搭建的个人博客。
+使用 Jekyll 与 GitHub Pages 搭建的个人博客，主题为 Minimal Mistakes。
 
 ## 本地预览
 
