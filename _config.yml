@@ -1,22 +1,44 @@
-title: Magic Alt 的博客
-description: 使用 GitHub Pages 与 Jekyll 搭建的个人博客。
+title: "Magic Alt 的博客"
+name: "Magic Alt"
+description: "使用 Minimal Mistakes 搭建的个人博客。"
+url: "https://your-username.github.io"
+baseurl: ""
+repository: "your-username/your-username.github.io"
 lang: zh-CN
 timezone: Asia/Shanghai
-url: ""
-baseurl: ""
 
-remote_theme: mmistakes/minimal-mistakes
-minimal_mistakes_skin: air
+minimal_mistakes_skin: "air"
+search: true
+
+remote_theme: "mmistakes/minimal-mistakes@4.27.3"
 
 plugins:
   - jekyll-feed
   - jekyll-include-cache
 
-author:
-  name: Magic Alt
-
-permalink: /:categories/:year/:month/:day/:title/
+permalink: /:categories/:title/
+paginate: 5
+paginate_path: /page:num/
 show_excerpts: true
+
+include:
+  - _pages
+
+author:
+  name: "Magic Alt"
+  avatar: "/assets/images/avatar.svg"
+  bio: "在这里写一句话简介。"
+  location: "China"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/your-username"
+
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/your-username"
 
 defaults:
   - scope:
