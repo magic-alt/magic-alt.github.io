@@ -1,9 +1,9 @@
 title: "Magic Alt 的博客"
 name: "Magic Alt"
 description: "使用 Minimal Mistakes 搭建的个人博客。"
-url: "https://your-username.github.io"
+url: "https://magic-alt.github.io"
 baseurl: ""
-repository: "your-username/your-username.github.io"
+repository: "magic-alt/magic-alt.github.io"
 lang: zh-CN
 timezone: Asia/Shanghai
 
@@ -32,13 +32,13 @@ author:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/your-username"
+      url: "https://github.com/magic-alt"
 
 footer:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/your-username"
+      url: "https://github.com/magic-alt"
 
 defaults:
   - scope:
