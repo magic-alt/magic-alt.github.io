@@ -1,0 +1,39 @@
+// Theme tweaks for Minimal Mistakes.
+$text-color: #1f2a37;
+$link-color: #0f766e;
+$masthead-link-color: #0f172a;
+$masthead-link-color-hover: #0f766e;
+$navicon-link-color-hover: #0f766e;
+$footer-background-color: #0b1f2a;
+
+body {
+  font-family: "Noto Serif SC", "Source Serif 4", "Noto Serif", "Georgia", serif;
+  line-height: 1.75;
+}
+
+.masthead {
+  background: linear-gradient(90deg, #f8fafc 0%, #e2f2f0 100%);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.page__title {
+  letter-spacing: 0.02em;
+}
+
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+code,
+pre code {
+  background: #f3f4f6;
+}
+
+.archive__item-title a {
+  text-decoration: none;
+}
+
+.archive__item-title a:hover {
+  text-decoration: underline;
+}
