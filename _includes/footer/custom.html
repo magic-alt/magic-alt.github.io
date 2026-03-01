@@ -1,0 +1,52 @@
+<!-- Tags page accordion: articles hidden until tag is clicked -->
+<script>
+(function () {
+  'use strict';
+
+  // Only run on pages that have taxonomy sections (i.e. /tags/)
+  document.addEventListener('DOMContentLoaded', function () {
+    var sections = document.querySelectorAll('.taxonomy__section');
+    if (!sections.length) return;
+
+    sections.forEach(function (section) {
+      var header  = section.querySelector('.archive__subtitle');
+      var entries = section.querySelector('.entries-list');
+      if (!header || !entries) return;
+
+      // Hide articles by default
+      entries.style.display = 'none';
+      header.style.cursor   = 'pointer';
+      header.style.userSelect = 'none';
+
+      // Add a small arrow indicator
+      var arrow = document.createElement('span');
+      arrow.className   = 'tag-arrow';
+      arrow.textContent = ' ›';
+      arrow.style.cssText = 'font-size:1.1em;transition:transform .2s;display:inline-block;margin-left:.3em;';
+      header.appendChild(arrow);
+
+      // Toggle on click
+      header.addEventListener('click', function () {
+        var open = entries.style.display !== 'none';
+        entries.style.display = open ? 'none' : '';
+        arrow.style.transform = open ? '' : 'rotate(90deg)';
+      });
+    });
+
+    // If the URL already carries a hash (e.g. /tags/#AI), auto-open that section
+    function openHash() {
+      var hash = window.location.hash;
+      if (!hash) return;
+      var target = document.querySelector(hash);
+      if (!target || !target.classList.contains('taxonomy__section')) return;
+      var entries = target.querySelector('.entries-list');
+      var arrow   = target.querySelector('.tag-arrow');
+      if (entries) entries.style.display = '';
+      if (arrow)   arrow.style.transform = 'rotate(90deg)';
+    }
+
+    openHash();
+    window.addEventListener('hashchange', openHash);
+  });
+}());
+</script>

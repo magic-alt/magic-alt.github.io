@@ -3,8 +3,6 @@ main:
     url: /
   - title: "文章"
     url: /year-archive/
-  - title: "分类"
-    url: /categories/
   - title: "标签"
     url: /tags/
   - title: "关于"
