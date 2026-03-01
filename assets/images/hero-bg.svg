@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="500" viewBox="0 0 1600 500">
+  <defs>
+    <!-- Sky gradient -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="40%" stop-color="#162955"/>
+      <stop offset="70%" stop-color="#1a3a6b"/>
+      <stop offset="100%" stop-color="#1f4a7a"/>
+    </linearGradient>
+    <!-- Swirl gradient -->
+    <radialGradient id="swirl1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4a90d9" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#2b5ea7" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#162955" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="swirl2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6db3f2" stop-opacity="0.8"/>
+      <stop offset="40%" stop-color="#3d7ec4" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#162955" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Moon glow -->
+    <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fffde7" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#fff59d" stop-opacity="0.8"/>
+      <stop offset="70%" stop-color="#ffcc02" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffcc02" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Star glow -->
+    <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff9c4" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#ffee58" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ffcc02" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Sky background -->
+  <rect width="1600" height="500" fill="url(#sky)"/>
+
+  <!-- Large swirling cloud bands — characteristic Starry Night flowing shapes -->
+  <!-- Main swirl band 1 -->
+  <path d="M0,180 C100,140 200,200 350,170 C500,140 550,210 700,190 C850,170 900,130 1050,160 C1200,190 1300,140 1400,170 C1500,200 1550,160 1600,180 L1600,230 C1500,210 1400,250 1300,220 C1200,190 1050,240 900,210 C750,180 700,250 550,230 C400,210 300,260 150,230 C50,210 0,240 0,230Z"
+        fill="#1e4d8a" opacity="0.7"/>
+  <path d="M0,190 C150,160 250,220 400,185 C550,150 650,230 800,200 C950,170 1050,230 1200,195 C1350,160 1450,210 1600,190 L1600,220 C1450,240 1350,200 1200,225 C1050,250 950,200 800,230 C650,260 550,190 400,220 C250,250 150,200 0,225Z"
+        fill="#2563a8" opacity="0.5"/>
+
+  <!-- Main swirl band 2 -->
+  <path d="M0,260 C200,230 300,290 500,255 C700,220 800,300 1000,270 C1200,240 1350,290 1600,260 L1600,310 C1350,340 1200,280 1000,310 C800,340 700,270 500,300 C300,330 200,280 0,310Z"
+        fill="#1a4a80" opacity="0.6"/>
+  <path d="M0,270 C150,250 350,300 550,265 C750,230 850,310 1100,280 C1300,250 1450,300 1600,275 L1600,300 C1450,320 1300,280 1100,305 C850,330 750,270 550,295 C350,320 150,280 0,300Z"
+        fill="#2d6fb8" opacity="0.4"/>
+
+  <!-- Spiral swirl — the iconic center -->
+  <ellipse cx="700" cy="200" rx="90" ry="65" fill="url(#swirl1)" opacity="0.8"/>
+  <ellipse cx="700" cy="200" rx="60" ry="42" fill="url(#swirl2)" opacity="0.7"/>
+  <ellipse cx="700" cy="200" rx="35" ry="22" fill="#5ba3e6" opacity="0.5"/>
+  <!-- Spiral lines -->
+  <path d="M640,200 C650,170 700,155 730,175 C760,195 750,230 720,235 C690,240 660,220 660,200"
+        fill="none" stroke="#7ec0f5" stroke-width="2.5" opacity="0.6"/>
+  <path d="M625,195 C635,155 695,135 740,165 C785,195 770,250 730,260 C690,270 645,240 640,205"
+        fill="none" stroke="#5ba3e6" stroke-width="2" opacity="0.4"/>
+
+  <!-- Second spiral -->
+  <ellipse cx="1150" cy="170" rx="70" ry="50" fill="url(#swirl1)" opacity="0.6"/>
+  <ellipse cx="1150" cy="170" rx="45" ry="30" fill="url(#swirl2)" opacity="0.5"/>
+  <path d="M1105,170 C1110,148 1145,138 1170,155 C1195,172 1190,200 1165,205 C1140,210 1115,192 1115,175"
+        fill="none" stroke="#7ec0f5" stroke-width="2" opacity="0.5"/>
+
+  <!-- Third spiral -->
+  <ellipse cx="350" cy="220" rx="55" ry="40" fill="url(#swirl1)" opacity="0.5"/>
+  <ellipse cx="350" cy="220" rx="32" ry="22" fill="url(#swirl2)" opacity="0.4"/>
+
+  <!-- Crescent Moon -->
+  <circle cx="1350" cy="110" r="50" fill="url(#moonGlow)"/>
+  <circle cx="1350" cy="110" r="32" fill="#fff9c4"/>
+  <circle cx="1365" cy="100" r="28" fill="#0a1628" opacity="0.6"/>
+
+  <!-- Stars with halos -->
+  <!-- Star 1 — large -->
+  <circle cx="200" cy="80" r="20" fill="url(#starGlow)"/>
+  <circle cx="200" cy="80" r="5" fill="#fffde7"/>
+  <line x1="200" y1="60" x2="200" y2="100" stroke="#fff9c4" stroke-width="1.5" opacity="0.7"/>
+  <line x1="180" y1="80" x2="220" y2="80" stroke="#fff9c4" stroke-width="1.5" opacity="0.7"/>
+  <line x1="188" y1="68" x2="212" y2="92" stroke="#fff9c4" stroke-width="1" opacity="0.4"/>
+  <line x1="212" y1="68" x2="188" y2="92" stroke="#fff9c4" stroke-width="1" opacity="0.4"/>
+
+  <!-- Star 2 -->
+  <circle cx="500" cy="60" r="16" fill="url(#starGlow)"/>
+  <circle cx="500" cy="60" r="4" fill="#fffde7"/>
+  <line x1="500" y1="44" x2="500" y2="76" stroke="#fff9c4" stroke-width="1.2" opacity="0.6"/>
+  <line x1="484" y1="60" x2="516" y2="60" stroke="#fff9c4" stroke-width="1.2" opacity="0.6"/>
+
+  <!-- Star 3 -->
+  <circle cx="900" cy="50" r="18" fill="url(#starGlow)"/>
+  <circle cx="900" cy="50" r="4.5" fill="#fffde7"/>
+  <line x1="900" y1="32" x2="900" y2="68" stroke="#fff9c4" stroke-width="1.3" opacity="0.65"/>
+  <line x1="882" y1="50" x2="918" y2="50" stroke="#fff9c4" stroke-width="1.3" opacity="0.65"/>
+
+  <!-- Star 4 -->
+  <circle cx="1050" cy="85" r="14" fill="url(#starGlow)"/>
+  <circle cx="1050" cy="85" r="3.5" fill="#fffde7"/>
+  <line x1="1050" y1="71" x2="1050" y2="99" stroke="#fff9c4" stroke-width="1" opacity="0.5"/>
+  <line x1="1036" y1="85" x2="1064" y2="85" stroke="#fff9c4" stroke-width="1" opacity="0.5"/>
+
+  <!-- Star 5 -->
+  <circle cx="1500" cy="70" r="15" fill="url(#starGlow)"/>
+  <circle cx="1500" cy="70" r="4" fill="#fffde7"/>
+  <line x1="1500" y1="55" x2="1500" y2="85" stroke="#fff9c4" stroke-width="1.2" opacity="0.6"/>
+  <line x1="1485" y1="70" x2="1515" y2="70" stroke="#fff9c4" stroke-width="1.2" opacity="0.6"/>
+
+  <!-- Small scattered stars -->
+  <circle cx="80" cy="40" r="2" fill="#fffde7" opacity="0.8"/>
+  <circle cx="300" cy="120" r="2.5" fill="#fffde7" opacity="0.7"/>
+  <circle cx="450" cy="30" r="1.8" fill="#fffde7" opacity="0.6"/>
+  <circle cx="620" cy="70" r="2.2" fill="#fffde7" opacity="0.7"/>
+  <circle cx="780" cy="100" r="2" fill="#fffde7" opacity="0.5"/>
+  <circle cx="1000" cy="40" r="1.5" fill="#fffde7" opacity="0.6"/>
+  <circle cx="1250" cy="60" r="2" fill="#fffde7" opacity="0.7"/>
+  <circle cx="1420" cy="140" r="1.8" fill="#fffde7" opacity="0.5"/>
+  <circle cx="150" cy="150" r="1.5" fill="#fffde7" opacity="0.4"/>
+  <circle cx="550" cy="130" r="1.8" fill="#fffde7" opacity="0.5"/>
+  <circle cx="850" cy="135" r="2" fill="#fffde7" opacity="0.4"/>
+  <circle cx="1200" cy="100" r="1.5" fill="#fffde7" opacity="0.5"/>
+
+  <!-- Village / hills silhouette at bottom -->
+  <path d="M0,400 C50,380 80,390 120,370
+           L130,340 L140,370
+           C180,380 220,365 260,375
+           L270,330 L280,375
+           C320,385 380,370 420,380
+           L425,350 L430,380
+           C480,390 530,375 580,385
+           C630,395 680,380 720,390
+           L728,345 L736,390
+           C780,385 830,375 880,385
+           L890,340 L900,385
+           C950,395 1000,380 1050,390
+           L1058,355 L1066,390
+           C1120,385 1180,375 1220,385
+           C1280,395 1320,380 1380,390
+           L1388,350 L1396,390
+           C1440,385 1500,378 1550,388
+           C1570,392 1590,385 1600,390
+           L1600,500 L0,500Z"
+        fill="#0a0e1a"/>
+
+  <!-- Cypress tree silhouette — iconic Starry Night element -->
+  <path d="M100,400 C95,360 88,320 90,280 C92,240 85,200 88,170 C91,140 86,120 92,100
+           C95,90 98,85 100,82 C102,85 105,90 108,100
+           C114,120 109,140 112,170 C115,200 108,240 110,280
+           C112,320 105,360 100,400Z"
+        fill="#060b15"/>
+  <path d="M96,400 C93,370 90,330 92,290 C94,250 89,210 92,180 C95,150 90,130 95,110
+           C97,100 99,92 100,88 C101,92 103,100 105,110
+           C110,130 105,150 108,180 C111,210 106,250 108,290
+           C110,330 107,370 104,400Z"
+        fill="#0d1525" opacity="0.8"/>
+</svg>

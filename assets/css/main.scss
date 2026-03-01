@@ -5,78 +5,109 @@
 @import "minimal-mistakes";
 
 // ===================================================================
-// Custom Overrides
+// Custom Overrides — VitePress-like typography
 // ===================================================================
 
-// Better Chinese typography
+// Base font size — match VitePress 16px default
 html {
   font-size: 16px;
+
+  @media (min-width: 80em) {
+    font-size: 18px;
+  }
 }
 
+// Font family — Inter + Chinese fallbacks (same stack as VitePress)
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC",
-    "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-// Improve readability for long-form content
+// ===================================================================
+// Content typography
+// ===================================================================
 .page__content {
-  p, li {
-    font-size: 0.95em;
-    line-height: 1.85;
+  font-size: 1.05em;
+  line-height: 1.8;
+
+  p {
+    margin-bottom: 1.2em;
+  }
+
+  li {
+    margin-bottom: 0.35em;
+  }
+
+  h1 {
+    font-size: 1.8em;
   }
 
   h2 {
+    font-size: 1.45em;
     margin-top: 2em;
     padding-bottom: 0.3em;
     border-bottom: 1px solid #eaecef;
   }
+
+  h3 {
+    font-size: 1.2em;
+  }
 }
 
+// ===================================================================
 // Code blocks
+// ===================================================================
 div.highlighter-rouge,
 figure.highlight {
-  font-size: 0.85em;
+  font-size: 0.9em;
+  line-height: 1.6;
 }
 
-// Inline code
 code.highlighter-rouge {
-  padding: 0.15em 0.4em;
-  background: #f0f0f0;
-  border-radius: 3px;
-  font-size: 0.85em;
+  padding: 0.2em 0.45em;
+  background: #f6f8fa;
+  border-radius: 4px;
+  font-size: 0.88em;
 }
 
-// Better table styling
+// ===================================================================
+// Table
+// ===================================================================
 table {
-  font-size: 0.88em;
+  font-size: 0.92em;
 
   th {
     background-color: #f6f8fa;
   }
 }
 
-// Masthead (top nav) refinement
+// ===================================================================
+// Navigation & layout
+// ===================================================================
 .masthead {
   border-bottom: 1px solid #e8e8e8;
 }
 
-// Author sidebar bio
 .author__bio {
-  font-size: 0.82em;
+  font-size: 0.88em;
   color: #555;
 }
 
-// Breadcrumb styling
 .breadcrumbs {
-  font-size: 0.78em;
+  font-size: 0.82em;
 
   ol {
     padding: 0;
   }
 }
 
-// TOC (Table of Contents)
+// TOC
 .toc {
+  font-size: 0.88em;
+
   .nav__title {
     background: #667eea;
   }
@@ -85,5 +116,5 @@ table {
 // Footer
 .page__footer {
   color: #888;
-  font-size: 0.8em;
+  font-size: 0.85em;
 }
