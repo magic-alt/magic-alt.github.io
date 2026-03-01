@@ -120,20 +120,31 @@ table {
 }
 
 // ===================================================================
-// Hero banner — Starry Night full display
+// Hero banner — Starry Night, half-size, no text
 // ===================================================================
 .page__hero--overlay {
-  // Contain the full painting without cropping
-  background-size: contain !important;
+  // Show full painting at 50% of viewport width (half of original)
+  // Image ratio 1600:1016 → height = 50vw × 0.635 = 31.75vw
+  background-size: 50% auto !important;
   background-position: center center !important;
-  // Dark navy matches the painting edges and fills letterbox gaps
+  // Dark navy fills the letterbox areas beside the painting
   background-color: #0a1628 !important;
-  // Height scales with viewport to show the complete painting
-  // Image ratio: 1600x1016 → height = width × (1016/1600)
-  min-height: calc(100vw * 0.635) !important;
+  min-height: calc(50vw * 0.635) !important;
 
-  // On narrow screens keep a sensible minimum
-  @media (max-width: 48em) {
-    min-height: 56vw !important;
+  // On tablets / phones, scale up to fill width
+  @media (max-width: 64em) {
+    background-size: 80% auto !important;
+    min-height: calc(80vw * 0.635) !important;
+  }
+  @media (max-width: 36em) {
+    background-size: 100% auto !important;
+    min-height: calc(100vw * 0.635) !important;
+  }
+
+  // Hide site title, subtitle and any other text overlaid on the hero
+  .page__title,
+  .page__lead,
+  .page__hero-caption {
+    display: none !important;
   }
 }
