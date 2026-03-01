@@ -1,47 +1,109 @@
-title: "Magic Alt 的博客"
+# ===================================================================
+# Site Settings
+# ===================================================================
+title: "Magic Alt's Blog"
+subtitle: "AI Learning Journey"
 name: "Magic Alt"
-description: "使用 Minimal Mistakes 搭建的个人博客。"
+description: "一个喜欢捣鼓、热爱折腾的技术博客，记录 AI 学习之旅与实践心得。"
 url: "https://magic-alt.github.io"
 baseurl: ""
 repository: "magic-alt/magic-alt.github.io"
 lang: zh-CN
 timezone: Asia/Shanghai
 
+# ===================================================================
+# Theme
+# ===================================================================
 minimal_mistakes_skin: "air"
-search: true
-
 remote_theme: "mmistakes/minimal-mistakes@4.27.3"
 
+# ===================================================================
+# Search
+# ===================================================================
+search: true
+search_full_content: true
+
+# ===================================================================
+# SEO & Analytics
+# ===================================================================
+breadcrumbs: true
+
+# ===================================================================
+# Build Settings
+# ===================================================================
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: "highlight"
+    block:
+      line_numbers: false
+
+# ===================================================================
+# Plugins
+# ===================================================================
 plugins:
   - jekyll-feed
   - jekyll-include-cache
   - jekyll-remote-theme
+  - jekyll-sitemap
+  - jekyll-paginate
 
-permalink: /:categories/:title/
-paginate: 5
+# ===================================================================
+# Pagination
+# ===================================================================
+permalink: /:year/:month/:title/
+paginate: 8
 paginate_path: /page:num/
-show_excerpts: true
 
+# ===================================================================
+# Include / Exclude
+# ===================================================================
 include:
   - _pages
 
+exclude:
+  - node_modules
+  - vendor
+  - .git
+  - .gitignore
+  - README.md
+  - AGENTS.md
+  - Gemfile
+  - Gemfile.lock
+
+# ===================================================================
+# Author
+# ===================================================================
 author:
   name: "Magic Alt"
   avatar: "/assets/images/avatar.svg"
-  bio: "在这里写一句话简介。"
+  bio: "AI 探索者 | 喜欢捣鼓，热爱折腾"
   location: "China"
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/magic-alt"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope"
+      url: "mailto:magic-alt@users.noreply.github.com"
 
+# ===================================================================
+# Footer
+# ===================================================================
 footer:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/magic-alt"
 
+# ===================================================================
+# Defaults
+# ===================================================================
 defaults:
+  # Posts
   - scope:
       path: ""
       type: posts
@@ -52,8 +114,14 @@ defaults:
       comments: false
       share: true
       related: true
+      toc: true
+      toc_sticky: true
+      toc_label: "目录"
+      show_date: true
+  # Pages
   - scope:
       path: ""
       type: pages
     values:
       layout: single
+      author_profile: true

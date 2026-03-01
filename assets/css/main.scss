@@ -3,3 +3,87 @@
 
 // Only the main Sass file needs front matter.
 @import "minimal-mistakes";
+
+// ===================================================================
+// Custom Overrides
+// ===================================================================
+
+// Better Chinese typography
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC",
+    "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+// Improve readability for long-form content
+.page__content {
+  p, li {
+    font-size: 0.95em;
+    line-height: 1.85;
+  }
+
+  h2 {
+    margin-top: 2em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #eaecef;
+  }
+}
+
+// Code blocks
+div.highlighter-rouge,
+figure.highlight {
+  font-size: 0.85em;
+}
+
+// Inline code
+code.highlighter-rouge {
+  padding: 0.15em 0.4em;
+  background: #f0f0f0;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+// Better table styling
+table {
+  font-size: 0.88em;
+
+  th {
+    background-color: #f6f8fa;
+  }
+}
+
+// Masthead (top nav) refinement
+.masthead {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+// Author sidebar bio
+.author__bio {
+  font-size: 0.82em;
+  color: #555;
+}
+
+// Breadcrumb styling
+.breadcrumbs {
+  font-size: 0.78em;
+
+  ol {
+    padding: 0;
+  }
+}
+
+// TOC (Table of Contents)
+.toc {
+  .nav__title {
+    background: #667eea;
+  }
+}
+
+// Footer
+.page__footer {
+  color: #888;
+  font-size: 0.8em;
+}
