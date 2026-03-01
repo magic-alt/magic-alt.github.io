@@ -1,9 +1,9 @@
 # ===================================================================
 # Site Settings
 # ===================================================================
-title: "Magic Alt's Blog"
+title: "Kaermaxc's Blog"
 subtitle: "AI Learning Journey"
-name: "Magic Alt"
+name: "Kaermaxc"
 description: "一个喜欢捣鼓、热爱折腾的技术博客，记录 AI 学习之旅与实践心得。"
 url: "https://magic-alt.github.io"
 baseurl: ""
@@ -78,8 +78,8 @@ exclude:
 # Author
 # ===================================================================
 author:
-  name: "Magic Alt"
-  avatar: "/assets/images/avatar.svg"
+  name: "Kaermaxc"
+  avatar: "/assets/images/avatar.jpg"
   bio: "AI 探索者 | 喜欢捣鼓，热爱折腾"
   location: "China"
   links:

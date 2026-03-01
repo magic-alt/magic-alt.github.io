@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <!-- Roman geometric tile pattern -->
+    <pattern id="romanTile" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+      <!-- Background -->
+      <rect width="80" height="80" fill="#2c3e50"/>
+      <!-- Diamond center -->
+      <polygon points="40,8 72,40 40,72 8,40" fill="none" stroke="#c9a96e" stroke-width="1.5"/>
+      <!-- Inner diamond -->
+      <polygon points="40,20 60,40 40,60 20,40" fill="none" stroke="#c9a96e" stroke-width="1" opacity="0.6"/>
+      <!-- Corner squares -->
+      <rect x="0" y="0" width="16" height="16" fill="none" stroke="#c9a96e" stroke-width="1" opacity="0.4"/>
+      <rect x="64" y="0" width="16" height="16" fill="none" stroke="#c9a96e" stroke-width="1" opacity="0.4"/>
+      <rect x="0" y="64" width="16" height="16" fill="none" stroke="#c9a96e" stroke-width="1" opacity="0.4"/>
+      <rect x="64" y="64" width="16" height="16" fill="none" stroke="#c9a96e" stroke-width="1" opacity="0.4"/>
+      <!-- Cross lines in corners -->
+      <line x1="0" y1="0" x2="16" y2="16" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
+      <line x1="16" y1="0" x2="0" y2="16" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
+      <line x1="64" y1="0" x2="80" y2="16" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
+      <line x1="80" y1="0" x2="64" y2="16" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
+      <line x1="0" y1="64" x2="16" y2="80" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
+      <line x1="16" y1="64" x2="0" y2="80" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
+      <line x1="64" y1="64" x2="80" y2="80" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
+      <line x1="80" y1="64" x2="64" y2="80" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
+      <!-- Center dot -->
+      <circle cx="40" cy="40" r="3" fill="#c9a96e" opacity="0.5"/>
+      <!-- Edge midpoint dots -->
+      <circle cx="40" cy="0" r="2" fill="#c9a96e" opacity="0.3"/>
+      <circle cx="40" cy="80" r="2" fill="#c9a96e" opacity="0.3"/>
+      <circle cx="0" cy="40" r="2" fill="#c9a96e" opacity="0.3"/>
+      <circle cx="80" cy="40" r="2" fill="#c9a96e" opacity="0.3"/>
+      <!-- Meander-like L shapes at midpoints -->
+      <path d="M32,0 L32,8 L40,8" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.35"/>
+      <path d="M48,0 L48,8 L40,8" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.35"/>
+      <path d="M32,80 L32,72 L40,72" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.35"/>
+      <path d="M48,80 L48,72 L40,72" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.35"/>
+      <path d="M0,32 L8,32 L8,40" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.35"/>
+      <path d="M0,48 L8,48 L8,40" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.35"/>
+      <path d="M80,32 L72,32 L72,40" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.35"/>
+      <path d="M80,48 L72,48 L72,40" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.35"/>
+    </pattern>
+    <!-- Dark overlay gradient for text readability -->
+    <linearGradient id="overlay" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(0,0,0,0.3)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0.5)"/>
+    </linearGradient>
+  </defs>
+  <!-- Pattern background -->
+  <rect width="800" height="400" fill="url(#romanTile)"/>
+  <!-- Overlay for text contrast -->
+  <rect width="800" height="400" fill="url(#overlay)"/>
+</svg>
