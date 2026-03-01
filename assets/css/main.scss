@@ -118,3 +118,22 @@ table {
   color: #888;
   font-size: 0.85em;
 }
+
+// ===================================================================
+// Hero banner — Starry Night full display
+// ===================================================================
+.page__hero--overlay {
+  // Contain the full painting without cropping
+  background-size: contain !important;
+  background-position: center center !important;
+  // Dark navy matches the painting edges and fills letterbox gaps
+  background-color: #0a1628 !important;
+  // Height scales with viewport to show the complete painting
+  // Image ratio: 1600x1016 → height = width × (1016/1600)
+  min-height: calc(100vw * 0.635) !important;
+
+  // On narrow screens keep a sensible minimum
+  @media (max-width: 48em) {
+    min-height: 56vw !important;
+  }
+}
